@@ -19,7 +19,12 @@ palindromeButton.addEventListener("click", function onClick() {
         month: Number(filterHyphen[1]),
         year: Number(filterHyphen[0]),
       });
-      return (palindromeMessage.innerText = `Next Palindrome Date is ${next.day}-${next.month}-${next.year} missed by ${count}`);
+      const [countPrev, datePrev] = previousPalindromeDate({
+        day: Number(filterHyphen[2]),
+        month: Number(filterHyphen[1]),
+        year: Number(filterHyphen[0]),
+      });
+      return (palindromeMessage.innerText = `Next Palindrome Date is ${next.day}-${next.month}-${next.year} missed by ${count}, Previous Palindrome Date is ${datePrev.day}-${datePrev.month}-${datePrev.year}`);
     }
   }
 });
@@ -104,9 +109,9 @@ function checkLeapYear(year) {
 // NEXT DATE:
 
 function nextDate(date) {
-  var day = date.day + 1;
-  var month = date.month;
-  var year = date.year;
+  let day = date.day + 1;
+  let month = date.month;
+  let year = date.year;
   const isLeapYear = checkLeapYear(date.year);
   const listOfDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
