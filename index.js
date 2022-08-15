@@ -156,3 +156,51 @@ function nextPalindromeDate(date) {
 nextPalindromeDate(date);
 
 // PREVIOUS PALINDROME DATE:
+function previousDate(date) {
+  let day = date.day - 1;
+  let month = date.month;
+  let year = date.year;
+  const isLeapYear = checkLeapYear(date.year);
+  const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+  if (month === 3) {
+    if (isLeapYear) {
+      if (day === 0) {
+        day = 29;
+        month = month - 1;
+      }
+    } else {
+      if (day === 0) {
+        day = 28;
+        month = month - 1;
+      }
+    }
+  } else {
+    if (day === 0) {
+      day = monthDays[month - 2];
+      month = month - 1;
+    }
+  }
+
+  if (day === 0 && month === 1) {
+    day = 31;
+    month = 12;
+    year = year - 1;
+  }
+
+  return { day: day, month: month, year: year };
+}
+
+function previousPalindromeDate(date) {
+  var countPrev = 0;
+  var datePrev = previousDate(date);
+  while (1) {
+    countPrev++;
+    var checkForPalindrome = checkPalindromeForAllFormats(datePrev);
+    if (checkForPalindrome) {
+      break;
+    }
+    var datePrev = previousDate(datePrev);
+  }
+  return [countPrev, datePrev];
+}
